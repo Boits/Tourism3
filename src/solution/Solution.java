@@ -6,18 +6,10 @@ import order.Order;
 import storage.Storage;
 import user.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Solution {
     public static void main(String[] args) {
 
-        List<User> userList = new ArrayList<>();
-        List<Country> countryList = new ArrayList<>();
-        List<City> cityList = new ArrayList<>();
-        //List<Order> orderList = new ArrayList<>();
-
-        Storage storage = new Storage(userList,countryList,cityList);
+        Storage storage = new Storage();
 
         User user1 = new User("Chandler", "Bing", 1111);
         User user2 = new User("Joey", "Tribbiani", 2222);
@@ -38,6 +30,8 @@ public class Solution {
 
         Order order3 = new Order(user3, country2, city3);
         System.out.println(order3);
+
+
 
     }
 }
