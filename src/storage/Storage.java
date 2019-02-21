@@ -19,7 +19,7 @@ public class Storage {
     StorageMemoryService storageMemoryService = new StorageMemoryService(userList,countryList,cityList);
 
 
-    Storage(List<User> userList, List<Country> countryList, List<City> cityList){
+    public Storage(List<User> userList, List<Country> countryList, List<City> cityList){
         this.userList = userList;
         this.countryList = countryList;
         this.cityList = cityList;

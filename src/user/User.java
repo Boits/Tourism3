@@ -7,7 +7,7 @@ public class User {
     private String lastName;
     private Integer passport;
 
-    User(String firstName, String lastName, Integer passport) {
+    public User(String firstName, String lastName, Integer passport) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.passport = passport;

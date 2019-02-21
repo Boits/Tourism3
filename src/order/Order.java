@@ -11,7 +11,7 @@ public class Order {
     private Country country;
     private City city;
 
-    Order(User user, Country country, City city) {
+    public Order(User user, Country country, City city) {
         this.user = user;
         this.country = country;
         this.city = city;

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StorageMemoryService {
-
     List<User> userList;
     List<Country> countryList;
     List<City> cityList;
@@ -18,7 +17,7 @@ public class StorageMemoryService {
 
     StorageMemoryRepo storageMemoryRepo = new StorageMemoryRepo(userList,countryList,cityList);
 
-    StorageMemoryService(List<User> userList, List<Country> countryList, List<City> cityList){
+    public StorageMemoryService(List<User> userList, List<Country> countryList, List<City> cityList){
         this.userList = userList;
         this.countryList = countryList;
         this.cityList = cityList;

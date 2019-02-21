@@ -5,7 +5,7 @@ public class City {
     private double population;
     private boolean capital;
 
-    City(String nameCity, double population, boolean capital) {
+    public City(String nameCity, double population, boolean capital) {
         this.nameCity = nameCity;
         this.population = population;
         this.capital = capital;

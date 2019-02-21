@@ -4,7 +4,7 @@ public class Country {
     private String location;
     private String language;
 
-    Country(String location, String language) {
+    public Country(String location, String language) {
         this.location = location;
         this.language = language;
     }

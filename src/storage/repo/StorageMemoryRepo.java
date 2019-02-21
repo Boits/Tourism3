@@ -15,7 +15,7 @@ public class StorageMemoryRepo {
     List<City> cityList;
     List<Order> orderList;
 
-    StorageMemoryRepo(List<User> userList, List<Country> countryList, List<City> cityList){
+    public StorageMemoryRepo(List<User> userList, List<Country> countryList, List<City> cityList){
         this.userList = userList;
         this.countryList = countryList;
         this.cityList = cityList;
