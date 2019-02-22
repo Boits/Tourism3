@@ -60,7 +60,7 @@ public class UserMemoryRepo {
     public void printUsers() {
         System.out.println("All users:");
         for (User user : userList) {
-            System.out.print(user + " ");
+            System.out.print(user + " | ");
         }
     }
 }

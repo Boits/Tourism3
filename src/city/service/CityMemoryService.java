@@ -1,10 +1,9 @@
 package city.service;
 
-
 import city.City;
 import city.repo.CityMemoryRepo;
 
-public class CityMemotyService {
+public class CityMemoryService {
     CityMemoryRepo cityMemoryRepo = new CityMemoryRepo();
 
     public void addCity(City city) {
