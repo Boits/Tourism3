@@ -50,5 +50,8 @@ public class Solution {
         System.out.println();
 
         orderService.printOrders();
+        orderService.deleteOrderByEntity(order1);
+        orderService.printOrders();
+
     }
 }

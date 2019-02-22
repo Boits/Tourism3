@@ -2,11 +2,9 @@ package country.repo;
 
 import country.Country;
 
-import java.util.ArrayList;
-import java.util.List;
+import static storage.Storage.countryList;
 
 public class CountryMemoryRepo {
-    List<Country> countryList = new ArrayList<>();
 
     public void addCountry(Country country) {
         countryList.add(country);
@@ -45,6 +43,10 @@ public class CountryMemoryRepo {
                 deleteCountryByEntity(country);
             }
         }
+    }
+
+    public int sizeList() {
+        return countryList.size();
     }
 
     public void printCountries() {

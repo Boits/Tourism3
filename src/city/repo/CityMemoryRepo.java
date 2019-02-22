@@ -1,12 +1,9 @@
 package city.repo;
 
 import city.City;
-
-import java.util.ArrayList;
-import java.util.List;
+import static storage.Storage.cityList;
 
 public class CityMemoryRepo {
-    List<City> cityList = new ArrayList<>();
 
     public void addCity(City city) {
         cityList.add(city);
@@ -44,6 +41,10 @@ public class CityMemoryRepo {
                 deleteCityByEntity(city);
             }
         }
+    }
+
+    public int sizeList() {
+        return cityList.size();
     }
 
     public void printCities() {

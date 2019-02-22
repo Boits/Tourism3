@@ -1,13 +1,10 @@
 package order.repo;
 
 import order.Order;
-import order.service.OrderMemoryService;
 
-import java.util.ArrayList;
-import java.util.List;
+import static storage.Storage.orderList;
 
 public class OrderMemoryRepo {
-    List<Order> orderList = new ArrayList<>();
 
     public void addOrder(Order order) {
         orderList.add(order);
@@ -21,14 +18,14 @@ public class OrderMemoryRepo {
         orderList.remove(index);
     }
 
-    public Order findOrderByNumberOrder(Integer numberOrder) {
-        for (Order order : orderList) {
-            if (order.getNumberOrder().equals(numberOrder)) {
-                return order;
-            }
-        }
-        return null;
-    }
+//    public Order findOrderByNumberOrder(Integer numberOrder) {
+//        for (Order order : orderList) {
+//            if (order.getNumberOrder().equals(numberOrder)) {
+//                return order;
+//            }
+//        }
+//        return null;
+//    }
 
     public Integer findOrderIndexByEntity(Order order) {
         for (int i = 0; i < orderList.size(); i++) {
@@ -39,12 +36,15 @@ public class OrderMemoryRepo {
         return null;
     }
 
-    public void deleteOrderByNumberOrder(Integer numberOrder) {
-        for (Order order : orderList) {
-            if (order.getNumberOrder().equals(numberOrder)) {
-                deleteOrderByEntity(order);
-            }
-        }
+    //    public void deleteOrderByNumberOrder(Integer numberOrder) {
+//        for (Order order : orderList) {
+//            if (order.getNumberOrder().equals(numberOrder)) {
+//                deleteOrderByEntity(order);
+//            }
+//        }
+//    }
+    public int sizeList() {
+        return orderList.size();
     }
 
     public void printOrders() {

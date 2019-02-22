@@ -3,9 +3,6 @@ package user.service;
 import user.User;
 import user.repo.UserMemoryRepo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UserMemoryService {
     private UserMemoryRepo userMemoryRepo = new UserMemoryRepo();
 
@@ -21,6 +18,10 @@ public class UserMemoryService {
         userMemoryRepo.deleteUserByIndex(index);
     }
 
+    public void deleteUserByPassport(Integer passport) {
+        userMemoryRepo.deleteUserByPassport(passport);
+    }
+
     public User findUserByPassport(Integer passport) {
         return userMemoryRepo.findUserByPassport(passport);
     }
@@ -33,9 +34,8 @@ public class UserMemoryService {
         return userMemoryRepo.findUserIndexByEntity(user);
     }
 
-
-    public void deleteUserByPassport(Integer passport) {
-        userMemoryRepo.deleteUserByPassport(passport);
+    public int sizeList() {
+        return userMemoryRepo.sizeList();
     }
 
     public void printUsers() {

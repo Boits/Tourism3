@@ -19,12 +19,16 @@ public class OrderMemoryService {
         orderMemoryRepo.deleteOrderByIndex(index);
     }
 
-    public void deleteOrderByNumberOrder(Integer numberOrder) {
-        orderMemoryRepo.deleteOrderByNumberOrder(numberOrder);
-    }
+//    public void deleteOrderByNumberOrder(Integer numberOrder) {
+//        orderMemoryRepo.deleteOrderByNumberOrder(numberOrder);
+//    }
+//
+//    public Order findOrderByNumberOrder(Integer numberOrder) {
+//        return orderMemoryRepo.findOrderByNumberOrder(numberOrder);
+//    }
 
-    public Order findOrderByNumberOrder(Integer numberOrder) {
-        return orderMemoryRepo.findOrderByNumberOrder(numberOrder);
+    public int sizeList() {
+        return orderMemoryRepo.sizeList();
     }
 
     public Integer findOrderIndexByEntity(Order order) {

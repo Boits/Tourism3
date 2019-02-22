@@ -51,7 +51,6 @@ public class Order {
 
     @Override
     public String toString() {
-        System.out.println("Formed order.");
         return "User: " + user.getLastName() + ". Price: " + getPrice() + ". Country: " + country.getLocation() + ". City: " + city.getNameCity();
     }
 

@@ -30,6 +30,10 @@ public class CityMemoryService {
         return cityMemoryRepo.findCityIndexByEntity(city);
     }
 
+    public int sizeList() {
+        return cityMemoryRepo.sizeList();
+    }
+
     public void printCities() {
         cityMemoryRepo.printCities();
     }

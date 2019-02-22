@@ -1,13 +1,9 @@
 package user.repo;
 
+import static storage.Storage.userList;
 import user.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UserMemoryRepo {
-
-    List<User> userList = new ArrayList<>();
 
     public void addUser(User user) {
         userList.add(user);
@@ -55,6 +51,10 @@ public class UserMemoryRepo {
                 deleteUserByEntity(user);
             }
         }
+    }
+
+    public int sizeList() {
+        return userList.size();
     }
 
     public void printUsers() {

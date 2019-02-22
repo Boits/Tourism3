@@ -30,6 +30,10 @@ public class CountryMemoryService {
         return countryMemoryRepo.findCountryIndexByEntity(country);
     }
 
+    public int sizeList() {
+        return countryMemoryRepo.sizeList();
+    }
+
     public void printCountries() {
         countryMemoryRepo.printCountries();
     }

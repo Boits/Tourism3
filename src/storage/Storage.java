@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    List<User> userList = new ArrayList<>();
-    List<Country> countryList = new ArrayList<>();
-    List<City> cityList = new ArrayList<>();
-    List<Order> orderList = new ArrayList<>();
+    public static List<User> userList = new ArrayList<>();
+    public static List<Country> countryList = new ArrayList<>();
+    public static List<City> cityList = new ArrayList<>();
+    public static List<Order> orderList = new ArrayList<>();
 }
