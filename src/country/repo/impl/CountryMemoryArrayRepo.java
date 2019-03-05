@@ -6,9 +6,12 @@ import country.repo.CountryRepo;
 import country.search.CountrySearchCondition;
 import storage.SequenceGenerator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static common.solution.utils.StringUtils.isNotBlank;
 import static storage.Storage.countryArray;
 
 public class CountryMemoryArrayRepo implements CountryRepo {
@@ -49,6 +52,40 @@ public class CountryMemoryArrayRepo implements CountryRepo {
 
     @Override
     public List<Country> search(CountrySearchCondition searchCondition) {
+        if (searchCondition.getId() != null) {
+            return Collections.singletonList(findById(searchCondition.getId()));
+        } else {
+            boolean searchByName = isNotBlank(searchCondition.getName());
+            boolean searchByLanguage = isNotBlank(searchCondition.getLanguage());
+
+            Country[] result = new Country[countryArray.length];
+            int resultIndex = 0;
+
+            for (Country country : countryArray) {
+                if (country != null) {
+                    boolean found = true;
+
+                    if (found && searchByName) {
+                        found = searchCondition.getName().equals(country.getName());
+                    }
+
+                    if (searchByLanguage) {
+                        found = searchCondition.getLanguage().equals(country.getLanguage());
+                    }
+
+                    if (found) {
+                        result[resultIndex] = country;
+                        resultIndex++;
+                    }
+                }
+            }
+
+            if (resultIndex > 0) {
+                Country toReturn[] = new Country[resultIndex];
+                System.arraycopy(result, 0, toReturn, 0, resultIndex);
+                return new ArrayList<>(Arrays.asList(toReturn));
+            }
+        }
         return Collections.emptyList();
     }
 

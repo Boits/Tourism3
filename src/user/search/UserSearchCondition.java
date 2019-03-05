@@ -1,4 +1,6 @@
 package user.search;
 
-public class UserSearchCondition {
+import common.business.search.BaseSearchCondition;
+
+public class UserSearchCondition extends BaseSearchCondition {
 }

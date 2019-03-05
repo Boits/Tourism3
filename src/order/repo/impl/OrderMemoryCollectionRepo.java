@@ -39,6 +39,7 @@ public class OrderMemoryCollectionRepo implements OrderRepo {
 
     @Override
     public void printAll() {
+        Collections.sort(orderList);
         for (Order order : orderList) {
             System.out.println(order);
         }

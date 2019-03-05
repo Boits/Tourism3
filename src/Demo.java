@@ -1,15 +1,19 @@
 import city.service.CityService;
 import city.domain.City;
-import city.search.CitySearchCondition;
 import common.business.application.StorageType;
 import common.business.application.servicefactory.ServiceSupplier;
+import common.business.search.SortType;
 import country.domain.Country;
+import country.search.CountrySearchCondition;
 import country.service.CountryService;
 import order.domain.Order;
 import order.service.OrderService;
+import storage.Storage;
 import user.domain.User;
 import user.service.UserService;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Demo {
@@ -23,79 +27,48 @@ public class Demo {
     private static CityService cityService = ServiceSupplier.getInstance().getCityService();
 
     private static void addUsers() {
-        String[] usersAsCsv = new String[]{
-                "Chandler    | Bing      | 1111",
-                "Joey        | Tribbiani | 2222",
-                "Ross        | Geller    | 3333",};
-        for (String csvUser : usersAsCsv) {
-            String[] users = csvUser.split("\\|");
+        User user1 = new User("Name1","LastName1", 1111);
+        User user6 = new User("Name6","LastName6", 6666);
 
-            int index = -1;
-            userService.add(new User(users[++index].trim(), users[++index].trim(), Integer.parseInt(users[++index].trim())));
-        }
-    }
 
-    private static void addCities0(String cityCsv, String[] countriesCsv) {
+        userService.add(user1);
+        userService.add(user6);
+        user1.setId(120l);
+        user6.setId(140l);
+        userService.add(new User("Name3","LastName3", 3333));
+        userService.add(new User("Name2","LastName2", 2222));
+        userService.add(new User("Name5","LastName5", 5555));
+        userService.add(new User("Name4","LastName4", 4444));
 
-        String[] attrs = cityCsv.split("\\|");
-        int attrIndex = -1;
 
-        City city = new City(attrs[++attrIndex].trim(), attrs[++attrIndex].trim());
-        city.setCountries(new Country[countriesCsv.length]);
-
-        for (int i = 0; i < countriesCsv.length; i++) {
-            String csvCounty = countriesCsv[i];
-            attrIndex = -1;
-            attrs = csvCounty.split("\\|");
-
-            Country country = new Country();
-            country.setName(attrs[++attrIndex].trim());
-
-            city.getCountries()[i] = country;
-        }
-
-        cityService.add(city);
     }
 
     private static void addCities() {
-
-        String[] cityCountryCsv = new String[]{
-                "Spb   | Russia",
-                "Msc   | Russia",
-                "NY    | USA   ",};
-
-        for (String csvUser : cityCountryCsv) {
-            String[] cities = csvUser.split("\\|");
-
-            int index = -1;
-            City city = new City(cities[++index].trim(), cities[++index].trim());
-            cityService.add(city);
-        }
+        cityService.add(new City("Moscow", 12, true));
+        cityService.add(new City("Saint-Petersburg", 5, false));
+        cityService.add(new City("San Francisco", 0.8, false));
     }
 
     private static void addCountries() {
+        countryService.add(new Country("Russia", "RU"));
+        countryService.add(new Country("USA", "EN"));
+        countryService.add(new Country("Germany", "GE"));
+    }
 
-        String[] cityCountryCsv = new String[]{
-                "Russia     | RU",
-                "USA        | EN",
-                "Germany    | DE",};
+    private static void addOrders() {
+        List<Country> list = new ArrayList<>();
+        list.add(new Country("RussiaA", "RU"));
+        list.add(new Country("RussiaT", "RU"));
+        list.add(new Country("RussiaM", "RU"));
 
-        for (String csvUser : cityCountryCsv) {
-            String[] countries = csvUser.split("\\|");
-
-            int index = -1;
-            Country country = new Country(countries[++index].trim(), countries[++index].trim());
-            countryService.add(country);
-        }
+        orderService.add(new Order(new User("Name6","LastName6", 6666), 500,list));
     }
 
     public static void fillStorage() {
         addUsers();
         addCities();
         addCountries();
-
-        System.out.println("+++++++++++++++");
-
+        addOrders();
     }
 
     public static void printUsers() {
@@ -118,49 +91,39 @@ public class Demo {
 
         userService.deleteById(1L);
 
-        System.out.println("----------Search cities by country and countries name------------");
-        CitySearchCondition citySearchCondition = new CitySearchCondition();
-        citySearchCondition.setCountry("Russia");
-        citySearchCondition.setName("Ural");
-        List<City> searchResult = cityService.search(citySearchCondition);
+        System.out.println("----------Search country by countryName and language ------------");
+        CountrySearchCondition countrySearchCondition = new CountrySearchCondition();
+//        countrySearchCondition.setName("Russia");
+//        countrySearchCondition.setLanguage("RU");
 
-        System.out.println("----------Search result----------------------");
-        for (City city : searchResult) {
-            System.out.println(city);
+        countrySearchCondition.setName("Germany");
+        countrySearchCondition.setLanguage("GE");
+        List<Country> searchResult = countryService.search(countrySearchCondition);
+
+        for (Country country : searchResult) {
+            System.out.println(country);
         }
 
-        userService.add(new User("Monica", "Geller", 4444));
+        userService.add(new User("Monica", "Geller", 1234));
         userService.deleteById(33L);
     }
 
     public static void deleteCities() {
-        cityService.deleteById(1L);
+        cityService.deleteById(6L);
         cityService.deleteById(33L);
     }
 
     public static void deleteCountries() {
-        cityService.deleteById(1L);
+        cityService.deleteById(9L);
         cityService.deleteById(33L);
     }
 
     public static void deleteOrders() {
         orderService.deleteById(1L);
-        //
+
     }
 
-
     public static void main(String[] args) {
-
-//        Country country1 = new Country("Russia", "RU");
-//        Country country2 = new Country("USA", "EN");
-//
-//        City city1 = new City("Saint-Petersburg", 5, false);
-//        City city2 = new City("Moscow", 12, true);
-//        City city3 = new City("San Francisco", 0.8, false);
-//
-//        Order order1 = new Order(user1, country1, city1);
-//        Order order2 = new Order(user2, country1, city2);
-//        Order order3 = new Order(user3, country2, city3);
 
         fillStorage();
 
@@ -173,21 +136,22 @@ public class Demo {
         System.out.println("----------Countries------------");
         printCountries();
 
-        deleteUsers();
-        deleteCities();
-        deleteCountries();
-        System.out.println();
+        System.out.println("----------Orders------------");
+        printOrders();
 
-        System.out.println("=======================");
-
-        System.out.println("----------Users------------");
-        printUsers();
-
-        System.out.println("----------Cities------------");
-        printCities();
-
-        System.out.println("----------Countries------------");
-        printCountries();
+//        deleteUsers();
+//        deleteCities();
+//        deleteCountries();
+//        System.out.println();
+//
+//        System.out.println("----------Users------------");
+//        printUsers();
+//
+//        System.out.println("----------Cities------------");
+//        printCities();
+//
+//        System.out.println("----------Countries------------");
+//        printCountries();
 
     }
 }

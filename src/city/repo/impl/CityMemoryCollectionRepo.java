@@ -4,12 +4,8 @@ import city.domain.City;
 import city.repo.CityRepo;
 import city.search.CitySearchCondition;
 import storage.SequenceGenerator;
-
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import static common.solution.utils.StringUtils.isNotBlank;
 import static storage.Storage.cityList;
 
 public class CityMemoryCollectionRepo implements CityRepo {
@@ -26,41 +22,13 @@ public class CityMemoryCollectionRepo implements CityRepo {
     }
 
     @Override
-    public void update(City city) {
-        //we already in memory, no need to update object
+    public List<City> search(CitySearchCondition searchCondition) {
+        return Collections.emptyList();
     }
 
     @Override
-    public List<City> search(CitySearchCondition searchCondition) {
-        if (searchCondition.getId() != null) {
-            return Collections.singletonList(findById(searchCondition.getId()));
-        } else {
-            boolean searchByCountry = isNotBlank(searchCondition.getCountry());
-
-            boolean searchByName = isNotBlank(searchCondition.getName());
-
-            List<City> result = new ArrayList<>();
-
-            for (City city : cityList) {
-                if (city != null) {
-                    boolean found = true;
-
-                    if (searchByCountry) {
-                        found = searchCondition.getCountry().equals(city.getCountry());
-                    }
-
-                    if (found && searchByName) {
-                        found = searchCondition.getName().equals(city.getNameCity());
-                    }
-
-                    if (found) {
-                        result.add(city);
-                    }
-                }
-            }
-
-            return result;
-        }
+    public void update(City city) {
+        //
     }
 
     @Override
@@ -74,6 +42,7 @@ public class CityMemoryCollectionRepo implements CityRepo {
 
     @Override
     public void printAll() {
+        Collections.sort(cityList);
         for (City city : cityList) {
             System.out.println(city);
         }
@@ -87,6 +56,5 @@ public class CityMemoryCollectionRepo implements CityRepo {
         }
         return null;
     }
-
 }
 

@@ -3,12 +3,14 @@ package user.domain;
 import common.business.domain.BaseDomain;
 import order.domain.Order;
 
-public class User extends BaseDomain {
+import java.util.List;
+
+public class User extends BaseDomain implements Comparable<User>{
     private String firstName;
     private String lastName;
     private Integer passport;
+    private List<Order> orders;
     private ClientType clientType;
-    private Order[] orders;
 
     public User() {
     }
@@ -25,6 +27,14 @@ public class User extends BaseDomain {
         this.passport = passport;
     }
 
+    public User(String firstName, String lastName, Integer passport, List<Order> orders) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.passport = passport;
+        this.orders = orders;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -37,11 +47,11 @@ public class User extends BaseDomain {
         return passport;
     }
 
-    public Order[] getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
-    public void setOrders(Order[] orders) {
+    public void setOrders(List<Order> orders) {
         this.orders = orders;
     }
 
@@ -58,4 +68,11 @@ public class User extends BaseDomain {
         return id + " " + firstName + " " + lastName;
     }
 
+    @Override
+    public int compareTo(User other) {
+        if (other != null) {
+            return Long.compare(this.id, other.id);
+        }
+        return 1;
+    }
 }

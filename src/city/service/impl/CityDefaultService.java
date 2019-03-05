@@ -4,32 +4,20 @@ import city.domain.City;
 import city.repo.CityRepo;
 import city.search.CitySearchCondition;
 import city.service.CityService;
-import country.domain.Country;
-import country.repo.CountryRepo;
 
 import java.util.List;
 
 public class CityDefaultService implements CityService {
     private final CityRepo cityRepo;
-    private final CountryRepo countryRepo;
 
-    public CityDefaultService(CityRepo cityRepo, CountryRepo countryRepo) {
+    public CityDefaultService(CityRepo cityRepo) {
         this.cityRepo = cityRepo;
-        this.countryRepo = countryRepo;
     }
 
     @Override
     public void add(City city) {
         if (city != null) {
             cityRepo.add(city);
-
-            if (city.getCountries() != null) {
-                for (Country country : city.getCountries()) {
-                    if (country != null) {
-                        countryRepo.add(country);
-                    }
-                }
-            }
         }
     }
 

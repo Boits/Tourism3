@@ -26,6 +26,10 @@ public class UserMemoryArrayRepo implements UserRepo {
         userArray[userIndex] = user;
     }
 
+//    public void sort() {
+//        Collections.sort(userList);
+//    }
+
     @Override
     public void update(User user) {
         //we already in memory, no need to update object

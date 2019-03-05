@@ -1,62 +1,52 @@
 package order.domain;
 
-import city.domain.City;
 import common.business.domain.BaseDomain;
 import country.domain.Country;
 import user.domain.User;
 
-public class Order extends BaseDomain {
-    private User user;
-    private int price;
-    private Country country;
-    private City city;
-    private String description;
+import java.util.List;
 
-    public Order(User user, Country country, City city) {
+public class Order extends BaseDomain implements Comparable<Order> {
+    private User user;
+    private double price;
+    private List<Country> countries;
+
+    public Order(){
+
+    }
+
+    public Order(User user, double price, List<Country> countries) {
         this.user = user;
-        this.country = country;
-        this.city = city;
+        this.price = price;
+        this.countries = countries;
     }
 
     public User getUser() {
         return user;
     }
 
-    public int getPrice() {
-        return price();
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public City getCity() {
-        return city;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int price() {
-        price = 500;
-
-        if (city.isCapital()) {
-            price = price + 100;
-        }
-        if (city.getPopulation() > 4) {
-            price = price + 150;
-        }
+    public double getPrice() {
         return price;
     }
 
+    public List<Country> getCountries() {
+        return countries;
+    }
+
+    public void setCountries(List<Country> countries) {
+        this.countries = countries;
+    }
 
     @Override
     public String toString() {
-        return "User: " + user.getLastName() + ". Price: " + getPrice() + ". Country: " + country.getName() + ". City: " + city.getNameCity();
+        return id+" "+"User: " + user.getLastName() + ". Price: " + getPrice();
+    }
+
+    @Override
+    public int compareTo(Order other) {
+        if (other != null) {
+            return Long.compare(this.id, other.id);
+        }
+        return 1;
     }
 }

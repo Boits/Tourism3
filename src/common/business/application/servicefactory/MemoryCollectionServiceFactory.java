@@ -17,7 +17,7 @@ public class MemoryCollectionServiceFactory implements ServiceFactory {
 
     @Override
     public CityService getCityService() {
-        return new CityDefaultService(new CityMemoryCollectionRepo(), new CountryMemoryCollectionRepo());
+        return new CityDefaultService(new CityMemoryCollectionRepo());
     }
 
     @Override
