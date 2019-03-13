@@ -5,7 +5,7 @@ import common.business.domain.BaseDomain;
 
 import java.util.List;
 
-public class Country extends BaseDomain implements Comparable<Country>{
+public class Country extends BaseDomain{
     private String name;
     private String language;
     private List<City> cities;
@@ -43,11 +43,10 @@ public class Country extends BaseDomain implements Comparable<Country>{
         return id+" "+name + " " + language;
     }
 
-    @Override
-    public int compareTo(Country other) {
-        if (other != null) {
-            return Long.compare(this.id, other.id);
-        }
-        return 1;
+    public String getStr() {
+        return "id=" + id +
+                ", language='" + language + '\'' +
+                ", name='" + name + '\'' ;
+
     }
 }

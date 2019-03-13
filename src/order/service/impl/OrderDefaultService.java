@@ -32,6 +32,11 @@ public class OrderDefaultService implements OrderService {
     }
 
     @Override
+    public void update(Order entity) {
+        //
+    }
+
+    @Override
     public void delete(Order order) {
         if (order.getId() != null) {
             this.deleteById(order.getId());

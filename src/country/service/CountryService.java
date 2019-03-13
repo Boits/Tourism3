@@ -1,20 +1,13 @@
 package country.service;
 
-import common.business.service.BaseService;
+import common.solution.service.BaseService;
 import country.domain.Country;
 import country.search.CountrySearchCondition;
 
 import java.util.List;
 
-public interface CountryService extends BaseService {
-    void add(Country country);
-
-    Country findById(Long id);
-
-    void delete(Country country);
+public interface CountryService extends BaseService<Country, Long> {
 
     List<Country> search(CountrySearchCondition searchCondition);
-
-    void update(Country country);
 
 }

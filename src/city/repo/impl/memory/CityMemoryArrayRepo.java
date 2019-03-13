@@ -1,4 +1,4 @@
-package city.repo.impl;
+package city.repo.impl.memory;
 
 import city.domain.City;
 import city.repo.CityRepo;
@@ -28,7 +28,7 @@ public class CityMemoryArrayRepo implements CityRepo {
     }
 
     @Override
-    public City findById(long id) {
+    public City findById(Long id) {
         Integer cityIndex = findCityIndexById(id);
         if (cityIndex != null) {
             return cityArray[cityIndex];
@@ -49,7 +49,7 @@ public class CityMemoryArrayRepo implements CityRepo {
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         Integer cityIndex = findCityIndexById(id);
 
         if (cityIndex != null) {

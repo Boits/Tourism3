@@ -1,5 +1,5 @@
 package common.business.search;
 
-public enum SortType {
+public enum OrderDirection {
     ASC, DESC
 }

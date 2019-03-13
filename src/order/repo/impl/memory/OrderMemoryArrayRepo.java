@@ -1,4 +1,4 @@
-package order.repo.impl;
+package order.repo.impl.memory;
 
 import common.solution.utils.ArrayUtils;
 import order.domain.Order;
@@ -30,7 +30,7 @@ public class OrderMemoryArrayRepo implements OrderRepo {
     }
 
     @Override
-    public Order findById(long id) {
+    public Order findById(Long id) {
         Integer orderIndex = findOrderIndexById(id);
         if (orderIndex != null) {
             return orderArray[orderIndex];
@@ -40,7 +40,12 @@ public class OrderMemoryArrayRepo implements OrderRepo {
     }
 
     @Override
-    public void deleteById(long id) {
+    public void update(Order entity) {
+        //
+    }
+
+    @Override
+    public void deleteById(Long id) {
         Integer orderIndex = findOrderIndexById(id);
 
         if (orderIndex != null) {

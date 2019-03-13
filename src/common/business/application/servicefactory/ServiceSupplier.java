@@ -41,21 +41,6 @@ public final class ServiceSupplier {
         }
     }
 
-//    private ServiceSupplier(SortType sortType) {
-//        initServiceFactory2(sortType);
-//    }
-//
-//    private void initServiceFactory2(SortType sortType) {
-//        switch (sortType) {
-//            case ASC: {
-//                serviceFactory = new MemoryArrayServiceFactory();
-//            }
-//            case DESC: {
-//                serviceFactory = new MemoryCollectionServiceFactory();
-//            }
-//        }
-//    }
-
     public CityService getCityService() {
         return serviceFactory.getCityService();
     }

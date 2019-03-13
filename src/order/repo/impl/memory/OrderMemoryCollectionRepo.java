@@ -1,4 +1,4 @@
-package order.repo.impl;
+package order.repo.impl.memory;
 
 import order.domain.Order;
 import order.repo.OrderRepo;
@@ -19,8 +19,13 @@ public class OrderMemoryCollectionRepo implements OrderRepo {
     }
 
     @Override
-    public Order findById(long id) {
+    public Order findById(Long id) {
         return findOrderById(id);
+    }
+
+    @Override
+    public void update(Order entity) {
+        //
     }
 
     @Override
@@ -29,7 +34,7 @@ public class OrderMemoryCollectionRepo implements OrderRepo {
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         Order found = findOrderById(id);
 
         if (found != null) {
@@ -39,7 +44,6 @@ public class OrderMemoryCollectionRepo implements OrderRepo {
 
     @Override
     public void printAll() {
-        Collections.sort(orderList);
         for (Order order : orderList) {
             System.out.println(order);
         }

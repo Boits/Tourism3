@@ -2,18 +2,18 @@ import city.service.CityService;
 import city.domain.City;
 import common.business.application.StorageType;
 import common.business.application.servicefactory.ServiceSupplier;
-import common.business.search.SortType;
+import common.business.search.OrderDirection;
+import common.business.search.OrderType;
 import country.domain.Country;
+import country.search.CounrtyOrderByField;
 import country.search.CountrySearchCondition;
 import country.service.CountryService;
 import order.domain.Order;
 import order.service.OrderService;
-import storage.Storage;
 import user.domain.User;
 import user.service.UserService;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Demo {
@@ -27,18 +27,17 @@ public class Demo {
     private static CityService cityService = ServiceSupplier.getInstance().getCityService();
 
     private static void addUsers() {
-        User user1 = new User("Name1","LastName1", 1111);
-        User user6 = new User("Name6","LastName6", 6666);
-
+        User user1 = new User("Name1", "LastName1", 1111);
+        User user6 = new User("Name6", "LastName6", 6666);
 
         userService.add(user1);
         userService.add(user6);
         user1.setId(120l);
         user6.setId(140l);
-        userService.add(new User("Name3","LastName3", 3333));
-        userService.add(new User("Name2","LastName2", 2222));
-        userService.add(new User("Name5","LastName5", 5555));
-        userService.add(new User("Name4","LastName4", 4444));
+        userService.add(new User("Name3", "LastName3", 3333));
+        userService.add(new User("Name2", "LastName2", 2222));
+        userService.add(new User("Name5", "LastName5", 5555));
+        userService.add(new User("Name4", "LastName4", 4444));
 
 
     }
@@ -61,7 +60,7 @@ public class Demo {
         list.add(new Country("RussiaT", "RU"));
         list.add(new Country("RussiaM", "RU"));
 
-        orderService.add(new Order(new User("Name6","LastName6", 6666), 500,list));
+        orderService.add(new Order(new User("Name6", "LastName6", 6666), 500, list));
     }
 
     public static void fillStorage() {
@@ -123,6 +122,62 @@ public class Demo {
 
     }
 
+
+    public static void searchCountriesWithoutOrder() {
+        System.out.println("\n----------Search countries No order ------------");
+        CountrySearchCondition countrySearchCondition = new CountrySearchCondition();
+        List<Country> searchResult = countryService.search(countrySearchCondition);
+        for (Country country : searchResult) {
+            System.out.println(country.getStr());
+        }
+    }
+
+    public static void searchCountriesWithOrderAsc() {
+        System.out.println("\n----------Search countries Order ASC ------------");
+        CountrySearchCondition countrySearchCondition = new CountrySearchCondition();
+        countrySearchCondition.setOrderDirection(OrderDirection.ASC);
+        countrySearchCondition.setOrderByField(CounrtyOrderByField.LANGUAGE);
+        List<Country> searchResult = countryService.search(countrySearchCondition);
+        for (Country country : searchResult) {
+            System.out.println(country.getStr());
+        }
+    }
+
+    public static void searchCountriesWithOrderDesc() {
+        System.out.println("\n----------Search countries Order Desc ------------");
+        CountrySearchCondition countrySearchCondition = new CountrySearchCondition();
+        countrySearchCondition.setOrderDirection(OrderDirection.DESC);
+        countrySearchCondition.setOrderByField(CounrtyOrderByField.LANGUAGE);
+        List<Country> searchResult = countryService.search(countrySearchCondition);
+        for (Country country : searchResult) {
+            System.out.println(country.getStr());
+        }
+    }
+
+    public static void searchCountriesWithComplexOrderAsc() {
+        System.out.println("\n----------Search countries COMPLEX Order Desc ------------");
+        CountrySearchCondition countrySearchCondition = new CountrySearchCondition();
+        countrySearchCondition.setOrderDirection(OrderDirection.ASC);
+        countrySearchCondition.setOrderByField(CounrtyOrderByField.LANGUAGE);
+        countrySearchCondition.setOrderType(OrderType.COMPLEX);
+        List<Country> searchResult = countryService.search(countrySearchCondition);
+        for (Country country : searchResult) {
+            System.out.println(country.getStr());
+        }
+    }
+
+    public static void searchCountriesWithComplexOrderDesc() {
+        System.out.println("\n----------Search countries COMPLEX Order Desc ------------");
+        CountrySearchCondition countrySearchCondition = new CountrySearchCondition();
+        countrySearchCondition.setOrderDirection(OrderDirection.DESC);
+        countrySearchCondition.setOrderByField(CounrtyOrderByField.LANGUAGE);
+        countrySearchCondition.setOrderType(OrderType.COMPLEX);
+        List<Country> searchResult = countryService.search(countrySearchCondition);
+        for (Country country : searchResult) {
+            System.out.println(country.getStr());
+        }
+    }
+
     public static void main(String[] args) {
 
         fillStorage();
@@ -152,6 +207,12 @@ public class Demo {
 //
 //        System.out.println("----------Countries------------");
 //        printCountries();
+
+        searchCountriesWithoutOrder();
+        searchCountriesWithOrderAsc();
+        searchCountriesWithOrderDesc();
+        searchCountriesWithComplexOrderAsc();
+        searchCountriesWithComplexOrderDesc();
 
     }
 }

@@ -1,17 +1,11 @@
 package user.repo;
 
-import common.business.repo.BaseRepo;
+import common.solution.repo.BaseRepo;
 import user.domain.User;
 import user.search.UserSearchCondition;
 
 import java.util.List;
 
-public interface UserRepo extends BaseRepo {
-    void add(User user);
-
-    User findById(long id);
-
+public interface UserRepo extends BaseRepo<User, Long> {
     List<User> search(UserSearchCondition searchCondition);
-
-    void update(User user);
 }

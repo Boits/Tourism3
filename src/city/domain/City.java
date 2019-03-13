@@ -2,7 +2,7 @@ package city.domain;
 
 import common.business.domain.BaseDomain;
 
-public class City extends BaseDomain implements Comparable<City>{
+public class City extends BaseDomain {
     private String nameCity;
     private double population;
     private boolean capital;
@@ -20,7 +20,7 @@ public class City extends BaseDomain implements Comparable<City>{
     public City() {
     }
 
-    public City(String nameCity){
+    public City(String nameCity) {
         this.nameCity = nameCity;
     }
 
@@ -44,14 +44,7 @@ public class City extends BaseDomain implements Comparable<City>{
 
     @Override
     public String toString() {
-        return id+" " + nameCity + " " + population;
+        return id + " " + nameCity + " " + population;
     }
 
-    @Override
-    public int compareTo(City other) {
-        if (other != null) {
-            return Long.compare(this.id, other.id);
-        }
-        return 1;
-    }
 }

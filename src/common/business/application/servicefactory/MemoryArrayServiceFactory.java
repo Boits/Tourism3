@@ -1,15 +1,15 @@
 package common.business.application.servicefactory;
 
 import city.service.CityService;
-import city.repo.impl.CityMemoryArrayRepo;
+import city.repo.impl.memory.CityMemoryArrayRepo;
 import city.service.impl.CityDefaultService;
-import country.repo.impl.CountryMemoryArrayRepo;
+import country.repo.impl.memory.CountryMemoryArrayRepo;
 import country.service.CountryService;
 import country.service.impl.CountryDefaultService;
-import order.repo.impl.OrderMemoryArrayRepo;
+import order.repo.impl.memory.OrderMemoryArrayRepo;
 import order.service.OrderService;
 import order.service.impl.OrderDefaultService;
-import user.repo.impl.UserMemoryArrayRepo;
+import user.repo.impl.memory.UserMemoryArrayRepo;
 import user.service.UserService;
 import user.service.impl.UserDefaultService;
 

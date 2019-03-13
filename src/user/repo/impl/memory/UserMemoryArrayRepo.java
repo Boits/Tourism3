@@ -1,10 +1,11 @@
-package user.repo.impl;
+package user.repo.impl.memory;
 
 import common.solution.utils.ArrayUtils;
 import storage.SequenceGenerator;
 import user.domain.User;
 import user.repo.UserRepo;
 import user.search.UserSearchCondition;
+
 import static storage.Storage.userArray;
 
 import java.util.Collections;
@@ -26,18 +27,15 @@ public class UserMemoryArrayRepo implements UserRepo {
         userArray[userIndex] = user;
     }
 
-//    public void sort() {
-//        Collections.sort(userList);
-//    }
-
     @Override
     public void update(User user) {
-        //we already in memory, no need to update object
+        //
     }
 
     @Override
-    public User findById(long id) {
+    public User findById(Long id) {
         Integer userIndex = findUserIndexById(id);
+
         if (userIndex != null) {
             return userArray[userIndex];
         }
@@ -51,7 +49,7 @@ public class UserMemoryArrayRepo implements UserRepo {
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         Integer userIndex = findUserIndexById(id);
 
         if (userIndex != null) {

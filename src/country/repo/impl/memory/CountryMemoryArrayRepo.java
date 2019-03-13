@@ -1,4 +1,4 @@
-package country.repo.impl;
+package country.repo.impl.memory;
 
 import common.solution.utils.ArrayUtils;
 import country.domain.Country;
@@ -16,6 +16,7 @@ import static storage.Storage.countryArray;
 
 public class CountryMemoryArrayRepo implements CountryRepo {
     private static final Country[] EMPTY_COUNTRIES_ARR = new Country[0];
+    private CountryOrderingComponent orderingComponent = new CountryOrderingComponent();
     private int countryIndex = -1;
 
     @Override
@@ -32,7 +33,7 @@ public class CountryMemoryArrayRepo implements CountryRepo {
     }
 
     @Override
-    public Country findById(long id) {
+    public Country findById(Long id) {
         Integer countryIndex = findCountryIndexById(id);
         if (countryIndex != null) {
             return countryArray[countryIndex];
@@ -52,6 +53,21 @@ public class CountryMemoryArrayRepo implements CountryRepo {
 
     @Override
     public List<Country> search(CountrySearchCondition searchCondition) {
+        if (searchCondition.getId() != null) {
+            return Collections.singletonList(findById(searchCondition.getId()));
+        } else {
+            List<Country> result = doSearch(searchCondition);
+            boolean needOrdering = !result.isEmpty() && searchCondition.needOrdering();
+
+            if (needOrdering) {
+                orderingComponent.applyOrdering(result, searchCondition);
+            }
+
+            return result;
+        }
+    }
+
+    private List<Country> doSearch(CountrySearchCondition searchCondition) {
         if (searchCondition.getId() != null) {
             return Collections.singletonList(findById(searchCondition.getId()));
         } else {
@@ -95,7 +111,7 @@ public class CountryMemoryArrayRepo implements CountryRepo {
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         Integer countryIndex = findCountryIndexById(id);
 
         if (countryIndex != null) {
@@ -116,4 +132,5 @@ public class CountryMemoryArrayRepo implements CountryRepo {
             }
         }
     }
+
 }

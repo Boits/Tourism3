@@ -5,7 +5,7 @@ import order.domain.Order;
 
 import java.util.List;
 
-public class User extends BaseDomain implements Comparable<User>{
+public class User extends BaseDomain{
     private String firstName;
     private String lastName;
     private Integer passport;
@@ -66,13 +66,5 @@ public class User extends BaseDomain implements Comparable<User>{
     @Override
     public String toString() {
         return id + " " + firstName + " " + lastName;
-    }
-
-    @Override
-    public int compareTo(User other) {
-        if (other != null) {
-            return Long.compare(this.id, other.id);
-        }
-        return 1;
     }
 }

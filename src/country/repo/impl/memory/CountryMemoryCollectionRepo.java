@@ -1,4 +1,4 @@
-package country.repo.impl;
+package country.repo.impl.memory;
 
 import country.domain.Country;
 import country.repo.CountryRepo;
@@ -13,6 +13,7 @@ import static common.solution.utils.StringUtils.isNotBlank;
 import static storage.Storage.countryList;
 
 public class CountryMemoryCollectionRepo implements CountryRepo {
+    private CountryOrderingComponent orderingComponent = new CountryOrderingComponent();
 
     @Override
     public void add(Country country) {
@@ -21,7 +22,7 @@ public class CountryMemoryCollectionRepo implements CountryRepo {
     }
 
     @Override
-    public Country findById(long id) {
+    public Country findById(Long id) {
         return findCountryById(id);
     }
 
@@ -32,6 +33,21 @@ public class CountryMemoryCollectionRepo implements CountryRepo {
 
     @Override
     public List<Country> search(CountrySearchCondition searchCondition) {
+        if (searchCondition.getId() != null) {
+            return Collections.singletonList(findById(searchCondition.getId()));
+        } else {
+            List<Country> result = doSearch(searchCondition);
+
+            boolean needOrdering = !result.isEmpty() && searchCondition.needOrdering();
+            if (needOrdering) {
+                orderingComponent.applyOrdering(result, searchCondition);
+            }
+
+            return result;
+        }
+    }
+
+    private List<Country> doSearch(CountrySearchCondition searchCondition) {
         if (searchCondition.getId() != null) {
             return Collections.singletonList(findById(searchCondition.getId()));
         } else {
@@ -62,9 +78,8 @@ public class CountryMemoryCollectionRepo implements CountryRepo {
         }
     }
 
-
     @Override
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         Country found = findCountryById(id);
 
         if (found != null) {
@@ -74,7 +89,6 @@ public class CountryMemoryCollectionRepo implements CountryRepo {
 
     @Override
     public void printAll() {
-        Collections.sort(countryList);
         for (Country country : countryList) {
             System.out.println(country);
         }

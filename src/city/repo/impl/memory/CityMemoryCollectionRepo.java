@@ -1,4 +1,4 @@
-package city.repo.impl;
+package city.repo.impl.memory;
 
 import city.domain.City;
 import city.repo.CityRepo;
@@ -17,7 +17,7 @@ public class CityMemoryCollectionRepo implements CityRepo {
     }
 
     @Override
-    public City findById(long id) {
+    public City findById(Long id) {
         return findCityById(id);
     }
 
@@ -32,7 +32,7 @@ public class CityMemoryCollectionRepo implements CityRepo {
     }
 
     @Override
-    public void deleteById(long id) {
+    public void deleteById(Long id) {
         City found = findCityById(id);
 
         if (found != null) {
@@ -42,7 +42,6 @@ public class CityMemoryCollectionRepo implements CityRepo {
 
     @Override
     public void printAll() {
-        Collections.sort(cityList);
         for (City city : cityList) {
             System.out.println(city);
         }
