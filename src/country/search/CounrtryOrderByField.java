@@ -1,10 +1,10 @@
 package country.search;
 
-public enum CounrtyOrderByField {
+public enum CounrtryOrderByField {
     LANGUAGE("Language in Country"),
-    NAME("Countryname");
+    NAME("Country Name");
 
-    CounrtyOrderByField(String requestParamName) {
+    CounrtryOrderByField(String requestParamName) {
         this.requestParamName = requestParamName;
     }
 

@@ -5,7 +5,7 @@ import common.business.search.BaseSearchCondition;
 public class CountrySearchCondition extends BaseSearchCondition<Long> {
     private String name;
     private String language;
-    private CounrtyOrderByField orderByField;
+    private CounrtryOrderByField orderByField;
 
     public String getName() {
         return name;
@@ -23,11 +23,11 @@ public class CountrySearchCondition extends BaseSearchCondition<Long> {
         this.language = language;
     }
 
-    public CounrtyOrderByField getOrderByField() {
+    public CounrtryOrderByField getOrderByField() {
         return orderByField;
     }
 
-    public void setOrderByField(CounrtyOrderByField orderByField) {
+    public void setOrderByField(CounrtryOrderByField orderByField) {
         this.orderByField = orderByField;
     }
 }

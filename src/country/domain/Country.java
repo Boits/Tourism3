@@ -2,17 +2,20 @@ package country.domain;
 
 import city.domain.City;
 import common.business.domain.BaseDomain;
+import order.domain.Order;
 
 import java.util.List;
 
-public class Country extends BaseDomain{
+public class Country extends BaseDomain<Long> {
     private String name;
     private String language;
     private List<City> cities;
+    protected int telephoneCode;
+    protected Discriminator discriminator;
 
-    public Country(){
-
+    public Country() {
     }
+
     public Country(String name, String language) {
         this.name = name;
         this.language = language;
@@ -38,15 +41,25 @@ public class Country extends BaseDomain{
         this.cities = cities;
     }
 
+    public int getTelephoneCode() {
+        return telephoneCode;
+    }
+
+    public void setTelephoneCode(int telephoneCode) {
+        this.telephoneCode = telephoneCode;
+    }
+
+    public Discriminator getDiscriminator() {
+        return discriminator;
+    }
+
+//    public void setDiscriminator(Discriminator discriminator) {
+//        this.discriminator = discriminator;
+//    }
+
     @Override
     public String toString() {
-        return id+" "+name + " " + language;
+        return id + " " + name + " " + language;
     }
 
-    public String getStr() {
-        return "id=" + id +
-                ", language='" + language + '\'' +
-                ", name='" + name + '\'' ;
-
-    }
 }

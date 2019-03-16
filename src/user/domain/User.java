@@ -4,12 +4,14 @@ import common.business.domain.BaseDomain;
 import order.domain.Order;
 
 import java.util.List;
+import java.util.Objects;
 
-public class User extends BaseDomain{
+public class User extends BaseDomain<Long> {
     private String firstName;
     private String lastName;
     private Integer passport;
     private List<Order> orders;
+
     private ClientType clientType;
 
     public User() {
@@ -66,5 +68,22 @@ public class User extends BaseDomain{
     @Override
     public String toString() {
         return id + " " + firstName + " " + lastName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(passport, user.passport) &&
+                Objects.equals(orders, user.orders) &&
+                clientType == user.clientType;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, passport, orders, clientType);
     }
 }

@@ -17,12 +17,12 @@ public class MemoryArrayServiceFactory implements ServiceFactory {
 
     @Override
     public CityService getCityService() {
-        return new CityDefaultService(new CityMemoryArrayRepo());
+        return new CityDefaultService(new CityMemoryArrayRepo(), new OrderMemoryArrayRepo());
     }
 
     @Override
     public CountryService getCountryService() {
-        return new CountryDefaultService(new CountryMemoryArrayRepo());
+        return new CountryDefaultService(new CountryMemoryArrayRepo(), new CityMemoryArrayRepo(), new OrderMemoryArrayRepo());
     }
 
     @Override
@@ -32,6 +32,6 @@ public class MemoryArrayServiceFactory implements ServiceFactory {
 
     @Override
     public UserService getUserService() {
-        return new UserDefaultService(new UserMemoryArrayRepo());
+        return new UserDefaultService(new UserMemoryArrayRepo(),new OrderMemoryArrayRepo() );
     }
 }

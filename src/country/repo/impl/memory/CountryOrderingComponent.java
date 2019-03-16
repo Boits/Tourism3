@@ -1,7 +1,7 @@
 package country.repo.impl.memory;
 
 import country.domain.Country;
-import country.search.CounrtyOrderByField;
+import country.search.CounrtryOrderByField;
 import country.search.CountrySearchCondition;
 
 import java.util.Collections;
@@ -12,7 +12,7 @@ public class CountryOrderingComponent {
     public void applyOrdering(List<Country> countries, CountrySearchCondition countrySearchCondition) {
         Comparator<Country> countryComparator = null;
 
-        CounrtyOrderByField field = countrySearchCondition.getOrderByField();
+        CounrtryOrderByField field = countrySearchCondition.getOrderByField();
         switch (countrySearchCondition.getOrderType()) {
 
             case SIMPLE: {
@@ -23,6 +23,9 @@ public class CountryOrderingComponent {
                 countryComparator = CountryComparatorComponent.getInstance().getComplexComparator(field);
                 break;
             }
+
+
+
         }
 
         if (countryComparator != null) {

@@ -1,24 +1,43 @@
 package country.service.impl;
 
 import country.domain.Country;
+import city.domain.City;
 import country.repo.CountryRepo;
+import city.repo.CityRepo;
 import country.search.CountrySearchCondition;
 import country.service.CountryService;
+import order.domain.Order;
+import order.repo.OrderRepo;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class CountryDefaultService implements CountryService {
     private final CountryRepo countryRepo;
+    private final CityRepo cityRepo;
+    private final OrderRepo orderRepo;
 
-    public CountryDefaultService(CountryRepo countryRepo) {
+    public CountryDefaultService(CountryRepo countryRepo, CityRepo cityRepo, OrderRepo orderRepo) {
         this.countryRepo = countryRepo;
+        this.cityRepo = cityRepo;
+        this.orderRepo = orderRepo;
     }
+
     @Override
     public void add(Country country) {
         if (country != null) {
             countryRepo.add(country);
+
+            if (country.getCities() != null) {
+                for (City city : country.getCities()) {
+                    if (city != null) {
+                        cityRepo.add(city);
+                    }
+                }
+            }
         }
     }
+
 
     @Override
     public Country findById(Long id) {
@@ -32,19 +51,21 @@ public class CountryDefaultService implements CountryService {
     @Override
     public void delete(Country country) {
         if (country.getId() != null) {
-            this.deleteById(country.getId());
+            deleteOrdersByCountry(country);
+            deleteById(country.getId());
         }
     }
 
-    @Override
-    public List<Country> search(CountrySearchCondition searchCondition) {
-        return countryRepo.search(searchCondition);
-    }
+    private void deleteOrdersByCountry(Country country) {
 
-    @Override
-    public void update(Country country) {
-        if (country.getId() != null) {
-            countryRepo.update(country);
+        List<Order> orders = orderRepo.getAll();
+        Iterator<Order> iterator = orders.iterator();
+
+        while (iterator.hasNext()) {
+            Order order = iterator.next();
+            if (country.getId().equals(order.getCountry().getId())) {
+                iterator.remove();
+            }
         }
     }
 
@@ -58,5 +79,18 @@ public class CountryDefaultService implements CountryService {
     @Override
     public void printAll() {
         countryRepo.printAll();
+    }
+
+
+    @Override
+    public List<Country> search(CountrySearchCondition searchCondition) {
+        return countryRepo.search(searchCondition);
+    }
+
+    @Override
+    public void update(Country country) {
+        if (country.getId() != null) {
+            countryRepo.update(country);
+        }
     }
 }

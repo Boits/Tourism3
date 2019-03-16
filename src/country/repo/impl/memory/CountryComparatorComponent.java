@@ -1,21 +1,21 @@
 package country.repo.impl.memory;
 
 import country.domain.Country;
-import country.search.CounrtyOrderByField;
+import country.search.CounrtryOrderByField;
 
 import java.util.*;
 
 import static common.business.repo.memory.CommonComparatorHolder.getComparatorForNullableStrings;
-import static country.search.CounrtyOrderByField.LANGUAGE;
-import static country.search.CounrtyOrderByField.NAME;
+import static country.search.CounrtryOrderByField.LANGUAGE;
+import static country.search.CounrtryOrderByField.NAME;
 
 public final class CountryComparatorComponent {
     private static final CountryComparatorComponent INSTANCE = new CountryComparatorComponent();
-    private static Map<CounrtyOrderByField, Comparator<Country>> comparatorsByField = new HashMap<>();
+    private static Map<CounrtryOrderByField, Comparator<Country>> comparatorsByField = new HashMap<>();
     /**
      * For complex comparator only
      */
-    private static Set<CounrtyOrderByField> fieldComparePriorityOrder = new LinkedHashSet<>(Arrays.asList(LANGUAGE, NAME));
+    private static Set<CounrtryOrderByField> fieldComparePriorityOrder = new LinkedHashSet<>(Arrays.asList(LANGUAGE, NAME));
 
     static {
         comparatorsByField.put(LANGUAGE, getComparatorForLanguageField());
@@ -48,11 +48,11 @@ public final class CountryComparatorComponent {
         };
     }
 
-    public Comparator<Country> getComparatorForField(CounrtyOrderByField field) {
+    public Comparator<Country> getComparatorForField(CounrtryOrderByField field) {
         return comparatorsByField.get(field);
     }
 
-    public Comparator<Country> getComplexComparator(CounrtyOrderByField field) {
+    public Comparator<Country> getComplexComparator(CounrtryOrderByField field) {
         return new Comparator<Country>() {
 
             @Override
@@ -66,7 +66,7 @@ public final class CountryComparatorComponent {
                     if (result == 0) {
 
                         //loop through all possible sorting fields
-                        for (CounrtyOrderByField otherField : fieldComparePriorityOrder) {
+                        for (CounrtryOrderByField otherField : fieldComparePriorityOrder) {
                             //if i haven't sorted by field which is taken from parameter in function, i do sorting
                             if (!otherField.equals(field)) {
 

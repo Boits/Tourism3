@@ -80,4 +80,9 @@ public class UserMemoryArrayRepo implements UserRepo {
         return null;
     }
 
+    @Override
+    public List<User> getAll() {
+        return null;
+    }
+
 }

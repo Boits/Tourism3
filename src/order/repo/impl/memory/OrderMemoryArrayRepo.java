@@ -80,4 +80,9 @@ public class OrderMemoryArrayRepo implements OrderRepo {
         }
         return null;
     }
+
+    @Override
+    public List<Order> getAll() {
+        return null;
+    }
 }

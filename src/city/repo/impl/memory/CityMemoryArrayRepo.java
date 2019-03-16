@@ -8,6 +8,7 @@ import storage.SequenceGenerator;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.zip.CheckedInputStream;
 
 import static storage.Storage.cityArray;
 
@@ -78,5 +79,10 @@ public class CityMemoryArrayRepo implements CityRepo {
             if (city != null) {
                 System.out.println(city);
             }
+    }
+
+    @Override
+    public List<City> getAll() {
+        return null;
     }
 }

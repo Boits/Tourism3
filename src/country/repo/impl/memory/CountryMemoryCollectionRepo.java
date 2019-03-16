@@ -26,6 +26,15 @@ public class CountryMemoryCollectionRepo implements CountryRepo {
         return findCountryById(id);
     }
 
+    private Country findCountryById(long countryId) {
+        for (Country country : countryList) {
+            if (Long.valueOf(countryId).equals(country.getId())) {
+                return country;
+            }
+        }
+        return null;
+    }
+
     @Override
     public void update(Country country) {
         //
@@ -94,13 +103,8 @@ public class CountryMemoryCollectionRepo implements CountryRepo {
         }
     }
 
-    private Country findCountryById(long countryId) {
-        for (Country country : countryList) {
-            if (Long.valueOf(countryId).equals(country.getId())) {
-                return country;
-            }
-        }
-        return null;
+    @Override
+    public List<Country> getAll() {
+        return countryList;
     }
-
 }

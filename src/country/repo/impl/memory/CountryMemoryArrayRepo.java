@@ -22,9 +22,9 @@ public class CountryMemoryArrayRepo implements CountryRepo {
     @Override
     public void add(Country country) {
         if (countryIndex == countryArray.length - 1) {
-            Country[] newArrModels = new Country[countryArray.length * 2];
-            System.arraycopy(countryArray, 0, newArrModels, 0, countryArray.length);
-            countryArray = newArrModels;
+            Country[] newArr = new Country[countryArray.length * 2];
+            System.arraycopy(countryArray, 0, newArr, 0, countryArray.length);
+            countryArray = newArr;
         }
 
         countryIndex++;
@@ -132,5 +132,11 @@ public class CountryMemoryArrayRepo implements CountryRepo {
             }
         }
     }
+
+    @Override
+    public List<Country> getAll() {
+        return null;
+    }
+
 
 }

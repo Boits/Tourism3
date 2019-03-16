@@ -1,5 +1,7 @@
 package common.solution.service;
 
+import java.util.List;
+
 public interface BaseService<T, ID> {
     void add(T entity);
 

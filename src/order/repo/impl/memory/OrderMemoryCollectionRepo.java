@@ -1,5 +1,6 @@
 package order.repo.impl.memory;
 
+import city.domain.City;
 import order.domain.Order;
 import order.repo.OrderRepo;
 import order.search.OrderSearchCondition;
@@ -49,6 +50,11 @@ public class OrderMemoryCollectionRepo implements OrderRepo {
         }
     }
 
+    @Override
+    public List<Order> getAll() {
+        return orderList;
+    }
+
     private Order findOrderById(long orderId) {
         for (Order order : orderList) {
             if (Long.valueOf(orderId).equals(order.getId())) {
@@ -57,4 +63,5 @@ public class OrderMemoryCollectionRepo implements OrderRepo {
         }
         return null;
     }
+
 }
