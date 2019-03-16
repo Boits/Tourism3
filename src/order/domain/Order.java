@@ -55,10 +55,15 @@ public class Order extends BaseDomain<Long> {
         this.price = price;
     }
 
+
     @Override
     public String toString() {
-        return id + " " + user.getLastName() + " " + country.getName() + " " + city.getNameCity() + " " + price;
+        return new StringBuilder().append("Id: ").append(id).append("; User: ").append(user.getLastName()).append("; Country: ").append(country.getName()).append("; City: ").append(city.getNameCity()).append("; Price: ").append(price).toString();
     }
+//    @Override
+//    public String toString() {
+//        return id + " " + user.getLastName() + " " + country.getName() + " " + city.getNameCity() + " " + price;
+//    }
 
     @Override
     public boolean equals(Object o) {

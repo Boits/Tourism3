@@ -2,15 +2,11 @@ import city.service.CityService;
 import city.domain.City;
 import common.business.application.StorageType;
 import common.business.application.servicefactory.ServiceSupplier;
-import common.business.search.OrderDirection;
-import common.business.search.OrderType;
 import country.domain.Country;
-import country.domain.Discriminator;
-import country.search.CounrtryOrderByField;
-import country.search.CountrySearchCondition;
 import country.service.CountryService;
 import order.domain.Order;
 import order.service.OrderService;
+import reporting.Report;
 import user.domain.User;
 import user.service.UserService;
 
@@ -112,18 +108,22 @@ public class Demo {
         userService.add(user5);
         userService.add(user6);
 
-
         Order order1 = new Order(user1, country1, city2, 5000);
-        Order order2 = new Order(user2, country2, city3, 10000);
-        Order order3 = new Order(user4, country4, city6, 4000);
-        Order order4 = new Order(user2, country3, city4, 10000);
-        Order order5 = new Order(user6, country4, city6, 4000);
-        Order order6 = new Order(user4, country1, city2, 5000);
         orderService.add(order1);
+
+        Order order2 = new Order(user2, country2, city3, 10000);
         orderService.add(order2);
+
+        Order order3 = new Order(user4, country4, city6, 4000);
         orderService.add(order3);
+
+        Order order4 = new Order(user2, country3, city4, 10000);
         orderService.add(order4);
+
+        Order order5 = new Order(user6, country4, city6, 4000);
         orderService.add(order5);
+
+        Order order6 = new Order(user4, country1, city2, 5000);
         orderService.add(order6);
 
         List<Order> orderListForUser1 = new ArrayList<>();
@@ -144,22 +144,25 @@ public class Demo {
         orderListForUser6.add(order5);
         user6.setOrders(orderListForUser6);
 
+        System.out.println("Add orders to file 'ReportOrders.txt' ");
+
         showAll();
 
-//        System.out.println("============== Delete orders ======================");
+//        System.out.println("============== Delete orders =====================");
 //        orderService.delete(order1);
 //
 //        System.out.println("============== Delete users ======================");
 //        userService.delete(user2);
 //        userService.delete(user3); // throw UserHasNoOrdersException
-//
-//        System.out.println("============== Delete cities ======================");
-//        cityService.delete(city1);
+//        System.out.println("============== Delete cities =====================");
+//        cityService.delete(city1);  // without order
 //        cityService.delete(city6);
-//        System.out.println("============== Delete countries ======================");
+
+        System.out.println("============== Delete countries ====================");
 //        countryService.delete(country1);
-//        countryService.delete(country4);
-//        showAll();
-        
+        countryService.delete(country4);
+
+        showAll();
+
     }
 }

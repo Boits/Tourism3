@@ -2,6 +2,7 @@ package user.service.impl;
 
 import order.domain.Order;
 import order.repo.OrderRepo;
+import reporting.Report;
 import user.domain.User;
 import user.exceptions.UserHasNoOrdersException;
 import user.repo.UserRepo;
@@ -71,6 +72,7 @@ public class UserDefaultService implements UserService {
 
         if (user.getOrders() != null) {
             for (Order order : user.getOrders()) {
+                Report.deleteOrder(order);
                 orderRepo.deleteById(order.getId());
             }
         } else {

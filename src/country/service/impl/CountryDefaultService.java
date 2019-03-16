@@ -8,6 +8,7 @@ import country.search.CountrySearchCondition;
 import country.service.CountryService;
 import order.domain.Order;
 import order.repo.OrderRepo;
+import reporting.Report;
 
 import java.util.Iterator;
 import java.util.List;
@@ -64,6 +65,7 @@ public class CountryDefaultService implements CountryService {
         while (iterator.hasNext()) {
             Order order = iterator.next();
             if (country.getId().equals(order.getCountry().getId())) {
+                Report.deleteOrder(order);
                 iterator.remove();
             }
         }

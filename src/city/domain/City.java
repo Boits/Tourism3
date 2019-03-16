@@ -46,8 +46,12 @@ public class City extends BaseDomain<Long> {
 
     @Override
     public String toString() {
-        return id + " " + nameCity + " " + population;
+        return new StringBuilder().append("Id: ").append(id).append("; City: ").append(nameCity).append("; Population: ").append(population).toString();
     }
+//    @Override
+//    public String toString() {
+//        return id + " " + nameCity + " " + population;
+//    }
 
     @Override
     public boolean equals(Object o) {

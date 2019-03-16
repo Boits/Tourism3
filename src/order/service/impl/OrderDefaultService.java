@@ -4,6 +4,7 @@ import order.domain.Order;
 import order.repo.OrderRepo;
 import order.search.OrderSearchCondition;
 import order.service.OrderService;
+import reporting.Report;
 
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class OrderDefaultService implements OrderService {
     public void add(Order order) {
         if (order != null) {
             orderRepo.add(order);
+            Report.createOrder(order);
         }
     }
 
@@ -40,7 +42,7 @@ public class OrderDefaultService implements OrderService {
     @Override
     public void delete(Order order) {
         if (order.getId() != null) {
-            this.deleteById(order.getId());
+            deleteById(order.getId());
         }
     }
 

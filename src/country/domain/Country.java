@@ -57,9 +57,14 @@ public class Country extends BaseDomain<Long> {
 //        this.discriminator = discriminator;
 //    }
 
+
     @Override
     public String toString() {
-        return id + " " + name + " " + language;
+        return new StringBuilder().append("Id: ").append(id).append("; Country: ").append(name).append("; Language: ").append(language).toString();
     }
+//    @Override
+//    public String toString() {
+//        return id + " " + name + " " + language;
+//    }
 
 }

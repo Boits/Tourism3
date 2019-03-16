@@ -67,8 +67,13 @@ public class User extends BaseDomain<Long> {
 
     @Override
     public String toString() {
-        return id + " " + firstName + " " + lastName;
+        return new StringBuilder().append("Id: ").append(id).append("; UserName: ").append(firstName).append("; UserSurname: ").append(lastName).toString();
     }
+
+//    @Override
+//    public String toString() {
+//        return id + " " + firstName + " " + lastName;
+//    }
 
     @Override
     public boolean equals(Object o) {
