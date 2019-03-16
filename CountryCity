@@ -1,0 +1,13 @@
+|City|
+Moscow, 12, true
+Saint-Petersburg, 5, false
+San Francisco, 0.8, false
+Dresden, 0.5, false
+Berlin, 3.5, true
+Paris, 2.2, true
+
+|Country|
+Russia, RU
+USA, EN
+Germany, GE
+France, FR

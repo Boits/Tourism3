@@ -1,0 +1,16 @@
+Create order: Id: 17; User: LastName1; Country: Russia; City: Saint-Petersburg; Price: 5000.0
+Create order: Id: 18; User: LastName2; Country: USA; City: San Francisco; Price: 10000.0
+Create order: Id: 19; User: LastName4; Country: France; City: Paris; Price: 4000.0
+Create order: Id: 20; User: LastName2; Country: Germany; City: Dresden; Price: 10000.0
+Create order: Id: 21; User: LastName6; Country: France; City: Paris; Price: 4000.0
+Create order: Id: 22; User: LastName4; Country: Russia; City: Saint-Petersburg; Price: 5000.0
+Delete order: Id: 17; User: LastName1; Country: Russia; City: Saint-Petersburg; Price: 5000.0
+Delete order: Id: 22; User: LastName4; Country: Russia; City: Saint-Petersburg; Price: 5000.0
+Create order: Id: 17; User: LastName1; Country: Russia; City: Saint-Petersburg; Price: 5000.0
+Create order: Id: 18; User: LastName2; Country: USA; City: San Francisco; Price: 10000.0
+Create order: Id: 19; User: LastName4; Country: France; City: Paris; Price: 4000.0
+Create order: Id: 20; User: LastName2; Country: Germany; City: Dresden; Price: 10000.0
+Create order: Id: 21; User: LastName6; Country: France; City: Paris; Price: 4000.0
+Create order: Id: 22; User: LastName4; Country: Russia; City: Saint-Petersburg; Price: 5000.0
+Delete order: Id: 19; User: LastName4; Country: France; City: Paris; Price: 4000.0
+Delete order: Id: 21; User: LastName6; Country: France; City: Paris; Price: 4000.0
