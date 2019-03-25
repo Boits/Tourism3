@@ -30,7 +30,7 @@ public class CountriesWithCitiesXmlSaxHandler extends DefaultHandler {
             }
 
             case "country": {
-                if (isCountry(attributes)) {
+                if (isCountryWithColdClimate(attributes)) {
                     countries.add(new CountryWithColdClimate());
                 } else {
                     countries.add(new CountryWithHotClimate());
@@ -51,7 +51,7 @@ public class CountriesWithCitiesXmlSaxHandler extends DefaultHandler {
         }
     }
 
-    private boolean isCountry(Attributes attributes) {
+    private boolean isCountryWithColdClimate(Attributes attributes) {
         return Discriminator.COLD.equals(Discriminator.valueOf(attributes.getValue("type")));
     }
 

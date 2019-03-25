@@ -62,7 +62,7 @@ public class Order extends BaseDomain<Long> {
     }
 //    @Override
 //    public String toString() {
-//        return id + " " + user.getLastName() + " " + country.getName() + " " + city.getNameCity() + " " + price;
+//        return id + " " + user.getLastName() + " " + country.getNameCity() + " " + city.getNameCity() + " " + price;
 //    }
 
     @Override

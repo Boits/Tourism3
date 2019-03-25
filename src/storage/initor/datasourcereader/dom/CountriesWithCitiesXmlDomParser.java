@@ -14,6 +14,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static common.solution.utils.XmlDomUtils.getOnlyElementTextContent;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Double.parseDouble;
 
@@ -40,10 +41,6 @@ public class CountriesWithCitiesXmlDomParser implements XmlParser<List<Country>>
         return result;
     }
 
-    private static String getOnlyElementTextContent(Element elementSource, String tagName) {
-        NodeList elementsByTagName = elementSource.getElementsByTagName(tagName);
-        return elementsByTagName.item(0).getTextContent();
-    }
 
     private Country getCountryFromXmlElement(Element xmlCountry) {
 

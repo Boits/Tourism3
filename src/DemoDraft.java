@@ -111,10 +111,10 @@ public class DemoDraft {
 
         System.out.println("----------Search country by countryName and language ------------");
         CountrySearchCondition countrySearchCondition = new CountrySearchCondition();
-//        countrySearchCondition.setName("Russia");
+//        countrySearchCondition.setNameCity("Russia");
 //        countrySearchCondition.setLanguage("RU");
 
-        countrySearchCondition.setName("Germany");
+        countrySearchCondition.setNameCity("Germany");
         countrySearchCondition.setLanguage("GE");
         List<Country> searchResult = countryService.search(countrySearchCondition);
 

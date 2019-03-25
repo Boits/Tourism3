@@ -107,26 +107,7 @@ public class CountriesWithCitiesXmlStaxParser implements XmlParser<List<Country>
                             break;
                         }
                     }
-                    if (country instanceof CountryWithColdClimate) {
-                        switch (tag) {
-                            case "polarNight": {
-                                ((CountryWithColdClimate) country).setPolarNight(Boolean.parseBoolean(readContent(reader)));
-                                break;
-                            }
-                        }
-
-                    } else {
-                        switch (tag) {
-                            case "hottestMonth": {
-                                ((CountryWithHotClimate) country).setHottestMonth(readContent(reader));
-                                break;
-                            }
-                            case "averageTemperature": {
-                                ((CountryWithHotClimate) country).setAverageTemperature(Double.parseDouble(readContent(reader)));
-                                break;
-                            }
-                        }
-                    }
+                    getInformationAboutTypeOfCountry(country, tag, reader);
                     break;
                 }
 
@@ -136,6 +117,29 @@ public class CountriesWithCitiesXmlStaxParser implements XmlParser<List<Country>
             }
         }
         throw new RuntimeException("I didn't find suitable end tag");
+    }
+
+    private void getInformationAboutTypeOfCountry(Country country, String tag, XMLStreamReader reader) throws XMLStreamException {
+        if (country instanceof CountryWithColdClimate) {
+            switch (tag) {
+                case "polarNight": {
+                    ((CountryWithColdClimate) country).setPolarNight(Boolean.parseBoolean(readContent(reader)));
+                    break;
+                }
+            }
+
+        } else {
+            switch (tag) {
+                case "hottestMonth": {
+                    ((CountryWithHotClimate) country).setHottestMonth(readContent(reader));
+                    break;
+                }
+                case "averageTemperature": {
+                    ((CountryWithHotClimate) country).setAverageTemperature(Double.parseDouble(readContent(reader)));
+                    break;
+                }
+            }
+        }
     }
 
     private List<City> readCities(XMLStreamReader reader) throws XMLStreamException {

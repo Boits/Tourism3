@@ -48,5 +48,4 @@ public class StorageInitializer {
 
         return dataSourceReader.parseFile(filePath);
     }
-
 }
