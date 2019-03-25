@@ -6,6 +6,7 @@ import order.repo.OrderRepo;
 import order.search.OrderSearchCondition;
 import storage.SequenceGenerator;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -62,6 +63,19 @@ public class OrderMemoryCollectionRepo implements OrderRepo {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<Order> findByUserId(long userId) {
+        List<Order> ordersWithUserId = new ArrayList<>();
+
+        for (Order order : orderList) {
+            if (order.getUser().getId().equals(userId)) {
+                ordersWithUserId.add(order);
+            }
+        }
+
+        return ordersWithUserId;
     }
 
 }

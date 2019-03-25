@@ -6,7 +6,6 @@ import city.search.CitySearchCondition;
 import city.service.CityService;
 import order.domain.Order;
 import order.repo.OrderRepo;
-import reporting.Report;
 
 import java.util.Iterator;
 import java.util.List;
@@ -53,12 +52,10 @@ public class CityDefaultService implements CityService {
         while (iterator.hasNext()) {
             Order order = iterator.next();
             if (city.getId().equals(order.getCity().getId())) {
-                Report.deleteOrder(order);
                 iterator.remove();
             }
         }
     }
-
 
 //    private void deleteOrdersByCity(City city) {
 //        for (Order order : orderRepo.getAll()) {
@@ -93,6 +90,11 @@ public class CityDefaultService implements CityService {
     @Override
     public void printAll() {
         cityRepo.printAll();
+    }
+
+    @Override
+    public List<City> getAll() {
+        return cityRepo.getAll();
     }
 
 }

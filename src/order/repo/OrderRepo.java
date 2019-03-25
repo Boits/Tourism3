@@ -9,4 +9,5 @@ import java.util.List;
 public interface OrderRepo extends BaseRepo<Order, Long> {
 
     List<Order> search(OrderSearchCondition searchCondition);
+    List<Order> findByUserId(long userId);
 }

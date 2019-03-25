@@ -4,9 +4,9 @@ import order.domain.Order;
 import order.repo.OrderRepo;
 import order.search.OrderSearchCondition;
 import order.service.OrderService;
-import reporting.Report;
 
 
+import java.util.Collections;
 import java.util.List;
 
 public class OrderDefaultService implements OrderService {
@@ -21,7 +21,6 @@ public class OrderDefaultService implements OrderService {
     public void add(Order order) {
         if (order != null) {
             orderRepo.add(order);
-            Report.createOrder(order);
         }
     }
 
@@ -61,6 +60,20 @@ public class OrderDefaultService implements OrderService {
     @Override
     public void printAll() {
         orderRepo.printAll();
+    }
+
+    @Override
+    public List<Order> getAll() {
+        return orderRepo.getAll();
+    }
+
+    @Override
+    public List<Order> getOrdersByUser(Long userId) {
+        if (userId != null) {
+            return orderRepo.findByUserId(userId);
+        }
+
+        return Collections.emptyList();
     }
 
 }

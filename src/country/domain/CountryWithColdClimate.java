@@ -3,8 +3,11 @@ package country.domain;
 public class CountryWithColdClimate extends Country {
     private boolean polarNight;
 
-    CountryWithColdClimate(int telephoneCode, boolean polarNight) {
-        super.telephoneCode = telephoneCode;
+    public CountryWithColdClimate() {
+    }
+
+    public CountryWithColdClimate(String name, String language, boolean polarNight) {
+        super(name, language);
         this.polarNight = polarNight;
     }
 
@@ -17,7 +20,14 @@ public class CountryWithColdClimate extends Country {
     }
 
     @Override
-    public Discriminator getDiscriminator(){
-        return discriminator = Discriminator.COLD;
+    protected void initDiscriminator() {
+        discriminator = Discriminator.COLD;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "; polarNight: " + polarNight;
+    }
+
 }

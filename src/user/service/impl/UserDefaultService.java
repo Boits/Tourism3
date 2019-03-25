@@ -2,14 +2,16 @@ package user.service.impl;
 
 import order.domain.Order;
 import order.repo.OrderRepo;
-import reporting.Report;
 import user.domain.User;
-import user.exceptions.UserHasNoOrdersException;
+import user.exception.UserExceptionMeta;
+import user.exception.checked.UserHasNoOrdersException;
 import user.repo.UserRepo;
 import user.search.UserSearchCondition;
 import user.service.UserService;
 
 import java.util.List;
+
+import static user.exception.UserExceptionMeta.USER_HAS_NO_ORDERS_EXCEPTION;
 
 public class UserDefaultService implements UserService {
 
@@ -62,7 +64,7 @@ public class UserDefaultService implements UserService {
             try {
                 deleteOrdersByUser(user);
             } catch (UserHasNoOrdersException e) {
-                System.out.println(e.getMessageExceptions() + " Code exception = " + e.getCode());
+                System.out.println(e.getMessage());
             }
         }
         deleteById(user.getId());
@@ -72,11 +74,10 @@ public class UserDefaultService implements UserService {
 
         if (user.getOrders() != null) {
             for (Order order : user.getOrders()) {
-                Report.deleteOrder(order);
                 orderRepo.deleteById(order.getId());
             }
         } else {
-            throw new UserHasNoOrdersException();
+            throw new UserHasNoOrdersException(USER_HAS_NO_ORDERS_EXCEPTION);
         }
     }
 
@@ -102,5 +103,10 @@ public class UserDefaultService implements UserService {
     @Override
     public void printAll() {
         userRepo.printAll();
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userRepo.getAll();
     }
 }

@@ -4,8 +4,11 @@ public class CountryWithHotClimate extends Country {
     private String hottestMonth;
     private double averageTemperature;
 
-    CountryWithHotClimate(int telephoneCode, String hottestMonth, double averageTemperature) {
-        super.telephoneCode = telephoneCode;
+    public CountryWithHotClimate() {
+    }
+
+    public CountryWithHotClimate(String name, String language, String hottestMonth, double averageTemperature) {
+        super(name, language);
         this.hottestMonth = hottestMonth;
         this.averageTemperature = averageTemperature;
     }
@@ -27,12 +30,14 @@ public class CountryWithHotClimate extends Country {
     }
 
     @Override
-    public String toString() {
-        return id + " " + hottestMonth + " " + averageTemperature;
+    protected void initDiscriminator() {
+        discriminator = Discriminator.HOT;
     }
 
     @Override
-    public Discriminator getDiscriminator(){
-        return discriminator = Discriminator.HOT;
+    public String toString() {
+        return super.toString() +
+                "; hottestMonth: " + hottestMonth +
+                "; averageTemperature: " + averageTemperature;
     }
 }

@@ -14,4 +14,6 @@ public interface BaseService<T, ID> {
     void delete(T entity);
 
     void printAll();
+
+    List<T> getAll();
 }

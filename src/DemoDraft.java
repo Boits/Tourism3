@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DemoDraft {
+    /*
     static {
         ServiceSupplier.newInstance(StorageType.MEMORY_COLLECTION);
     }
@@ -292,4 +293,5 @@ public class DemoDraft {
         //deleteCities();
 
     }
+    */
 }

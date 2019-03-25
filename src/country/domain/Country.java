@@ -2,14 +2,13 @@ package country.domain;
 
 import city.domain.City;
 import common.business.domain.BaseDomain;
-import order.domain.Order;
 
 import java.util.List;
 
-public class Country extends BaseDomain<Long> {
-    private String name;
-    private String language;
-    private List<City> cities;
+public abstract class Country extends BaseDomain<Long> {
+    protected String name;
+    protected String language;
+    protected List<City> cities;
     protected int telephoneCode;
     protected Discriminator discriminator;
 
@@ -19,6 +18,7 @@ public class Country extends BaseDomain<Long> {
     public Country(String name, String language) {
         this.name = name;
         this.language = language;
+        initDiscriminator();
     }
 
     public String getName() {
@@ -31,6 +31,10 @@ public class Country extends BaseDomain<Long> {
 
     public String getLanguage() {
         return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public List<City> getCities() {
@@ -49,14 +53,11 @@ public class Country extends BaseDomain<Long> {
         this.telephoneCode = telephoneCode;
     }
 
+    protected abstract void initDiscriminator();
+
     public Discriminator getDiscriminator() {
         return discriminator;
     }
-
-//    public void setDiscriminator(Discriminator discriminator) {
-//        this.discriminator = discriminator;
-//    }
-
 
     @Override
     public String toString() {

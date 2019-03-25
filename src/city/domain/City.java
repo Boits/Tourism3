@@ -36,12 +36,24 @@ public class City extends BaseDomain<Long> {
         return nameCity;
     }
 
+    public void setNameCity(String nameCity) {
+        this.nameCity = nameCity;
+    }
+
     public double getPopulation() {
         return population;
     }
 
+    public void setPopulation(double population) {
+        this.population = population;
+    }
+
     public boolean isCapital() {
         return capital;
+    }
+
+    public void setCapital(boolean capital) {
+        this.capital = capital;
     }
 
     @Override

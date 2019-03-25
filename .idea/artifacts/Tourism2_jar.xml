@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="Tourism2:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/Tourism2_jar</output-path>
-    <root id="archive" name="Tourism2.jar">
-      <element id="module-output" name="Tourism2" />
-    </root>
-  </artifact>
-</component>

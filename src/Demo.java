@@ -3,43 +3,55 @@ import city.domain.City;
 import common.business.application.StorageType;
 import common.business.application.servicefactory.ServiceSupplier;
 import country.domain.Country;
+import country.domain.CountryWithColdClimate;
+import country.domain.CountryWithHotClimate;
 import country.service.CountryService;
 import order.domain.Order;
 import order.service.OrderService;
-import reporting.Report;
+import reporting.DetailedReportAboutUsersAndTheirOrders;
+import storage.initor.StorageInitializer;
 import user.domain.User;
 import user.service.UserService;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import static common.solution.utils.RandomUtils.getRandomInt;
 
 public class Demo {
     static {
         ServiceSupplier.newInstance(StorageType.MEMORY_COLLECTION);
     }
 
+    private static final String INIT_DATA_XML_FILE = "/Users/boits/IdeaProjects/Epam/Tourism2/data.xml";
+
     private static UserService userService = ServiceSupplier.getInstance().getUserService();
     private static OrderService orderService = ServiceSupplier.getInstance().getOrderService();
     private static CountryService countryService = ServiceSupplier.getInstance().getCountryService();
     private static CityService cityService = ServiceSupplier.getInstance().getCityService();
 
-    public static void printUsers() {
+    private static void printUsers() {
         userService.printAll();
     }
 
-    public static void printCities() {
+    private static void printCities() {
         cityService.printAll();
     }
 
-    public static void printCountries() {
+    private static void printCountries() {
         countryService.printAll();
     }
 
-    public static void printOrders() {
+    private static void printOrders() {
         orderService.printAll();
     }
 
-    public static void showAll() {
+    private static void showAll() {
         System.out.println("----------Users------------");
         printUsers();
 
@@ -53,8 +65,7 @@ public class Demo {
         printOrders();
     }
 
-    public static void main(String[] args) {
-
+    private static void fillStorageAll() {
         City city1 = new City("Moscow", 12, true);
         City city2 = new City("Saint-Petersburg", 5, false);
         City city3 = new City("San Francisco", 0.8, false);
@@ -62,7 +73,7 @@ public class Demo {
         City city5 = new City("Berlin", 3.5, true);
         City city6 = new City("Paris", 2.2, true);
 
-        Country country1 = new Country("Russia", "RU");
+        Country country1 = new CountryWithColdClimate("Russia", "RU", true);
         List<City> cityListForCountry1 = new ArrayList<>();
         cityListForCountry1.add(city1);
         cityListForCountry1.add(city2);
@@ -70,13 +81,13 @@ public class Demo {
         countryService.add(country1);
 
 
-        Country country2 = new Country("USA", "EN");
+        Country country2 = new CountryWithColdClimate("USA", "EN", false);
         List<City> cityList2 = new ArrayList<>();
         cityList2.add(city3);
         country2.setCities(cityList2);
         countryService.add(country2);
 
-        Country country3 = new Country("Germany", "GE");
+        Country country3 = new CountryWithHotClimate("Germany", "GE", "July", 20);
         List<City> cityList3 = new ArrayList<>();
         cityList3.add(city4);
         cityList3.add(city5);
@@ -84,7 +95,7 @@ public class Demo {
         countryService.add(country3);
 
 
-        Country country4 = new Country("France", "FR");
+        Country country4 = new CountryWithHotClimate("France", "FR", "June", 20);
         List<City> cityList4 = new ArrayList<>();
         cityList4.add(city6);
         country4.setCities(cityList4);
@@ -144,8 +155,6 @@ public class Demo {
         orderListForUser6.add(order5);
         user6.setOrders(orderListForUser6);
 
-        System.out.println("Add orders to file 'ReportOrders.txt' ");
-
         showAll();
 
 //        System.out.println("============== Delete orders =====================");
@@ -153,16 +162,117 @@ public class Demo {
 //
 //        System.out.println("============== Delete users ======================");
 //        userService.delete(user2);
-//        userService.delete(user3); // throw UserHasNoOrdersException
+//         userService.delete(user3); // throw UserExceptionMeta
 //        System.out.println("============== Delete cities =====================");
 //        cityService.delete(city1);  // without order
 //        cityService.delete(city6);
 
-        System.out.println("============== Delete countries ====================");
+//        System.out.println("============== Delete countries ====================");
 //        countryService.delete(country1);
-        countryService.delete(country4);
+//        countryService.delete(country4);
+//
+        showAll();
+    }
+
+    private static void addUsers() {
+        User user1 = new User("Name1", "LastName1", 1111);
+        User user2 = new User("Name2", "LastName2", 3333);
+        User user3 = new User("Name3", "LastName3", 2222);
+        User user4 = new User("Name4", "LastName4", 5555);
+        User user5 = new User("Name5", "LastName5", 4444);
+        User user6 = new User("Name6", "LastName6", 6666);
+        userService.add(user1);
+        userService.add(user2);
+        userService.add(user3);
+        userService.add(user4);
+        userService.add(user5);
+        userService.add(user6);
+    }
+
+    private static void fillStorageWithCountriesAndCities() {
+
+        StorageInitializer storageInitor = new StorageInitializer(countryService);
+        File fileWithInitData;
+        try {
+            fileWithInitData = new File(INIT_DATA_XML_FILE);
+            storageInitor.initStorageWithCountriesAndCities(fileWithInitData.getAbsolutePath(), StorageInitializer.DataSourceType.XML_FILE);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void addOrders() {
+        List<Country> countries = countryService.getAll();
+        List<User> users = userService.getAll();
+
+        List<Order> orders = new ArrayList<>();
+        for (User user : users) {
+            orders.add(prepareOrderForUser(user, countries));
+        }
+
+        for (Order order : orders) {
+            orderService.add(order);
+        }
+    }
+
+    private static Order prepareOrderForUser(User user, List<Country> countries) {
+        Order order = new Order();
+        order.setUser(user);
+        Country country = countries.get(getRandomInt(0, countries.size() - 1));
+        order.setCountry(country);
+        order.setCity(country.getCities().get(getRandomInt(0, country.getCities().size() - 1)));
+        order.setPrice(getRandomInt(1, 100000));
+
+//        Order order = new Order();
+//        order.setUser(user);
+//        order.setCountry(countries.get(count));
+//        order.setCity(countries.get(count).getCities().get(countCity++));
+//        count++;
+//        order.setPrice(getRandomInt(1, 100000));
+
+//        for (Country country : countries) {
+//            order.setCountry(country);
+//            for (City city : country.getCities()) {
+//                order.setCity(city);
+//                order.setPrice(getRandomInt(1, 100000));
+//            }
+//        }
+
+        return order;
+    }
+
+    private static void fillStorageWithCountriesAndCitiesJAXB() throws JAXBException {
+
+        try {
+            JAXBContext context = JAXBContext.newInstance(Country.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            Country dataFromXml = (Country) unmarshaller.unmarshal(Demo.class.getResourceAsStream(INIT_DATA_XML_FILE));
+
+        } catch (JAXBException ex) {
+            System.out.println("Ex" + ex.getMessage());
+        }
+    }
+
+
+    static int count = 0;
+    static int countCity = 0;
+
+    public static void main(String[] args) throws JAXBException {
+        //fillStorageAll();
+
+        addUsers();
+
+        fillStorageWithCountriesAndCities();
+//        fillStorageWithCountriesAndCitiesJAXB();
+
+        addOrders();
 
         showAll();
 
+        System.out.println('\n' + "Add information about users and orders to file 'InformationAboutUsers.txt' ");
+
+        DetailedReportAboutUsersAndTheirOrders.getInformationAboutUsers(userService, orderService);
+
     }
+
 }
